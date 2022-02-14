@@ -29,13 +29,17 @@ Greg built a simple proof-of-concept that illustrates the concept/workflow and r
 We can divide responsibilities up for the project roughly as follows (feel free to weigh in on your preferred role -- I'm just guessing for now):
 
 - Greg will be responsible for project management, the HTML/JS user interface, Puppeteer integration testing, and any other JS needs. He'll be responsible for keeping the project glued together. He might also be involved in the C++ engine as needed. He's happy to share any of these duties if there's interest.
-- Severin will focus on C++ game engine mechanics and some HTML/JS
+- Severin will focus on C++ game engine mechanics/back-end and assets maybe some HTML/JS
 - Juan will focus on C++ game engine mechanics and assets
 - Irvin will focus on C++ game engine mechanics and assets
 
 ### Further details
 
 We've decided on a one-player [puzzle game](https://en.wikipedia.org/wiki/List_of_puzzle_video_games) like Sokoban or Qualio.
+
+### Stretch goals
+
+Implementation of turn based mechanics, i.e. combat
 
 ### Architecture diagram
 
