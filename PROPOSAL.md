@@ -40,9 +40,6 @@ World generation. The world will have a square dimension with a maxium 30 x 30 t
 Character. The main character will have four main movements: forward, backward,
 left and right. These movements will be controlled by keyboard presses. If the user presses the UP button, the character will move one tile to the north, or if the user presses DOWN button, the character will move one tile to the south. The character can only move within the constraints of the map. The character can push on an existing box but can't go beyond any immovable obstacles (like the walls).
 
-### Game Mechanics
-
-
 ### Stretch goals
 * In world generation, we can build a randomized map based on specified level of difficulty. In the beginning of the game, the user can input an integer which will represent the level of difficulty. We can pass that input to a function (e.g. mapgenerator(level)) to build a new map. This randomized map generator can replace the pre-determined maps that we used in the beginning phase of our development.
 * In character, we can add an option of selecting three different type of characters to use.
