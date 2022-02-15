@@ -31,7 +31,22 @@ We can divide responsibilities up for the project roughly as follows (feel free 
 - Greg will be responsible for project management, the HTML/JS user interface, Puppeteer integration testing, and any other JS needs. He'll be responsible for keeping the project glued together. He might also be involved in the C++ engine as needed. He's happy to share any of these duties if there's interest.
 - Severin will focus on C++ game engine mechanics and some HTML/JS
 - Juan will focus on C++ game engine mechanics and assets
-- Irvin will focus on C++ game engine mechanics and assets
+- Irvin will focus on C++ game engine mechanics and assets.
+
+### Gameplay Requirements
+
+World generation. The world will have a square dimension with a maxium 30 x 30 tiles. The world will have an aerial perspective (viewed from above). The world elements will consist of tiled floors, walls or holes. Each level will have a predetermined map with increasing difficulty.
+
+Character. The main character will have a four main movements: forward, backward,
+left and right. These movements will be controlled by keyboard presses. The character can only move within the constraints of the map. The character can push on an existing box but can't go beyond any immovable obstacles (like the walls).
+
+### Game Mechanics
+
+
+### Stretch goals
+* In world generation, we can build a randomized map based on specified level of difficulty. In the beginning of the game, the user can input an integer which will represent the level of difficulty. We can pass that input to a function (e.g. mapgenerator(level)) to build a new map. This randomized map generator can replace the pre-determined maps that we used in the beginning phase of our development.
+* In character, we can add an option of selecting three different type of characters to use.
+* AI generated optimized solution. With the given world, we can implement Dijkstra's algorightm to find the shortest path to a goal. We can use that to add as a HINT feature or some sort.
 
 ### Further details
 
