@@ -37,8 +37,8 @@ We can divide responsibilities up for the project roughly as follows (feel free 
 
 World generation. The world will have a square dimension with a maxium 30 x 30 tiles. The world will have an aerial perspective (viewed from above). The world elements will consist of tiled floors, walls or holes. Each level will have a predetermined map with increasing difficulty.
 
-Character. The main character will have a four main movements: forward, backward,
-left and right. These movements will be controlled by keyboard presses. The character can only move within the constraints of the map. The character can push on an existing box but can't go beyond any immovable obstacles (like the walls).
+Character. The main character will have four main movements: forward, backward,
+left and right. These movements will be controlled by keyboard presses. If the user presses the UP button, the character will move one tile to the north, or if the user presses DOWN button, the character will move one tile to the south. The character can only move within the constraints of the map. The character can push on an existing box but can't go beyond any immovable obstacles (like the walls).
 
 ### Game Mechanics
 
