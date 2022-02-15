@@ -31,7 +31,7 @@ We can divide responsibilities up for the project roughly as follows (feel free 
 - Greg will be responsible for project management, the HTML/JS user interface, Puppeteer integration testing, and any other JS needs. He'll be responsible for keeping the project glued together. He might also be involved in the C++ engine as needed. He's happy to share any of these duties if there's interest.
 - Severin will focus on C++ game engine mechanics and some HTML/JS
 - Juan will focus on C++ game engine mechanics and assets
-- Irvin will focus on C++ game engine mechanics and assets.
+- Irvin will focus on C++ game engine mechanics, assets, and the loading screen animation for the game using HTML/JS. 
 
 ### Gameplay Requirements
 
