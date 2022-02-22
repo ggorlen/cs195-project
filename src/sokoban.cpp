@@ -11,7 +11,7 @@ Sokoban::Sokoban() {
 
 /* Constructor with a specified level number*/
 Sokoban::Sokoban(unsigned int level) {
-    change_level(inputNumber);
+    change_level(level);
 }
 
 /* Switch to a specific level */
