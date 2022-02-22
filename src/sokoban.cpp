@@ -6,12 +6,12 @@
 
 /* Constructor with default level 1*/
 Sokoban::Sokoban() {
-    change_level(1);
+    Sokoban(1);
 }
 
 /* Constructor with a specified level number*/
 Sokoban::Sokoban(unsigned int inputNumber) {
-    change_level(inputNumber - 1);
+    change_level(inputNumber);
 }
 
 /* Switch to level level_number*/
