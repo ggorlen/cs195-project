@@ -15,7 +15,7 @@ class Sokoban {
     /* Sokoban Methods */
     public:
         Sokoban();
-        Sokoban(unsigned int inputNumber);
+        Sokoban(unsigned int level);
         std::vector<std::string> getWorld();
         bool move(Direction direction);
         void change_level(unsigned int level_number);
