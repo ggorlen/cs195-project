@@ -5,7 +5,6 @@
 #include "elements.hpp"
 
 class Sokoban {
-    /* Sokoban Attribute */
     protected:
         std::vector<std::string> current_board;
         std::string movesSequence;
