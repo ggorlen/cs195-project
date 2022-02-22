@@ -10,7 +10,6 @@ class Sokoban {
         std::vector<std::string> current_board;
         std::string movesSequence;
         unsigned int current_level;
-        unsigned int moves_count;
 
     /* Sokoban Methods */
     public:
