@@ -14,7 +14,7 @@ Sokoban::Sokoban(unsigned int level) {
     change_level(inputNumber);
 }
 
-/* Switch to level level_number*/
+/* Switch to a specific level */
 void Sokoban::change_level(unsigned int level_number) {
     if (level_number > levels.size()) {
         throw std::invalid_argument("Level does not exist.");
