@@ -40,7 +40,7 @@ std::vector<std::string> Sokoban::board() {
 }
 
 /* Return the number of moves made on the current board */
-unsigned int Sokoban::moves () {
+unsigned int Sokoban::moves() {
     return moves_count;
 }
 
