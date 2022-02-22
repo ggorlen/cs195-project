@@ -4,18 +4,25 @@
 #include <string>
 
 /*
- *  MAP CONSTANTS
+ *  CELL STATES
  */ 
 const char EMPTY = ' ';
 const char WALL = '#';
-const char GOAL = 'C';
+const char GOAL = '.';
 const char BOX = '$';
-const char GOAL_BOX = '*';
+const char BOX_ON_GOAL = '*';
 const char PLAYER = '@';
+const char PLAYER_ON_GOAL = '+';
 
+/*
+ * PLAYER DIRECTIONAL MOVEMENTS
+ */
+enum Direction {U, D, L, R};
 
-/* Puzzle maps with 100 levels */
-const std::vector<std::vector<std::string>> worlds = {
+/* 
+ * CLASSICAL SOBOKAN LEVELS FROM 1 TO 100
+ */
+const std::vector<std::vector<std::string>> levels = {
     /* Level 1 */
     {"    #####",
     "    #   #",
