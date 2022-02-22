@@ -52,7 +52,7 @@ unsigned int Sokoban::level() {
 /* Return whether the current board is solved */
 bool Sokoban::solved() {
     
-    for(std::string row : current_board) {
+    for (std::string row : current_board) {
         /* When GOAL is found, this means that
          * a box is not yet placed in the goal */
         if (row.find(GOAL) < row.size()) {
