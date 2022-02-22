@@ -10,7 +10,6 @@ class Sokoban {
         std::string movesSequence;
         unsigned int current_level;
 
-    /* Sokoban Methods */
     public:
         Sokoban();
         Sokoban(unsigned int level);
