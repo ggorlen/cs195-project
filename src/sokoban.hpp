@@ -13,7 +13,6 @@ class Sokoban {
     public:
         Sokoban();
         Sokoban(unsigned int level);
-        std::vector<std::string> getWorld();
         bool move(Direction direction);
         void change_level(unsigned int level_number);
         void set_level(unsigned int level_number);
