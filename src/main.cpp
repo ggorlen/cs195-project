@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "counter.hpp"
-#include "sokoban.hpp"
 
 //#include <emscripten/emscripten.h>
 
@@ -10,12 +9,12 @@
 Counter c;
 
 extern "C" {
-    int click(int num, char *s) {
-        // pass some random args from JS just to show that it can be done
-        std::cout << "click called with args (" << num << ", " << s << ")\n";
-        c.increment();
-        return c.count;
-    }
+int click(int num, char *s) {
+    // pass some random args from JS just to show that it can be done
+    std::cout << "click called with args (" << num << ", " << s << ")\n";
+    c.increment();
+    return c.count;
+}
 }
 
 //int main() {

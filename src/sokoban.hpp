@@ -1,25 +1,27 @@
 #ifndef __SOKOBAN_HPP__
 #define __SOKOBAN_HPP__
-#include <vector>
+
 #include <string>
+#include <vector>
+
 #include "elements.hpp"
 
 class Sokoban {
     protected:
         std::vector<std::string> current_board;
-        std::string movesSequence;
+        std::string moves;
         unsigned int current_level;
-
     public:
+        enum Direction {U, D, L, R};
+
         Sokoban();
         Sokoban(unsigned int level);
-        bool move(Direction direction);
         void change_level(unsigned int level_number);
-        void set_level(unsigned int level_number);
         void reset();
         void undo();
         std::vector<std::string> board();
-        unsigned int moves();
+        bool move(Direction direction);
+        unsigned int moves_count();
         unsigned int level();
         bool solved();
 };
