@@ -31,7 +31,7 @@ void Sokoban::reset() {
 
 /* Undo the last move */
 void Sokoban::undo() {
-    movesSequence.pop_back();
+    moves.pop_back();
 }
 
 /* Return the current baord */
