@@ -6,4 +6,5 @@ node_modules/
 *.gch
 *.out
 *.exe
+*.dSYM
 doctest.h
