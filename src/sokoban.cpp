@@ -15,11 +15,6 @@ Sokoban::Sokoban(unsigned int level) {
     change_level(level);
 }
 
-/* Constructor with a specified board. Useful for testing */
-Sokoban::Sokoban(std::vector<std::string> board) {
-    current_board = board;
-}
-
 /* Switch to a specific level */
 void Sokoban::change_level(unsigned int level) {
     if (level > levels.size()) {
@@ -36,10 +31,12 @@ void Sokoban::reset() {
 }
 
 /* Undo the last move if MOVES is not an empty string */
-void Sokoban::undo() {
+bool Sokoban::undo() {
     if (!moves.empty()) {
         moves.pop_back();
+        return true;
     }
+    return false;
 }
 
 /* Return the current baord */
@@ -92,12 +89,12 @@ void Sokoban::print() {
     }
 }
 
+
 // int main() {
 //     Sokoban soko = Sokoban();
 //     soko.print();
 
-//     soko = Sokoban(1);
+//     soko = Sokoban(5);
 //     soko.print();
-//     return 0;
 //     return 0;
 // }

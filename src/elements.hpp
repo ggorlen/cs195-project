@@ -16,16 +16,16 @@
 /* Mock level used for testing purposes only */
 const std::vector<std::vector<std::string>> levels = {
     /* Useful to test move(Direction) */
-    {"##########",
-     "#        #",
-     "#.@   $  #",
-     "#        #",
-     "##########" },
+    {
+        "#####",
+        "#@$.#",
+        "#####",
+    },
 
-     {"     ###     ",
-      "     #@#     ",
-      "######$######",
-      "#     .     #",
-      "#############"}
+    {"     ###     ",
+    "     #@#     ",
+    "######$######",
+    "#     .     #",
+    "#############"}
 };
 #endif
