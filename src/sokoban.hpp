@@ -16,6 +16,7 @@ class Sokoban {
 
         Sokoban();
         Sokoban(unsigned int level);
+        Sokoban(std::vector<std::string> board);
         void change_level(unsigned int level_number);
         void reset();
         void undo();
@@ -24,5 +25,6 @@ class Sokoban {
         unsigned int moves_count();
         unsigned int level();
         bool solved();
+        void print();
 };
 #endif

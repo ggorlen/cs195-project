@@ -7,12 +7,17 @@
 
 /* Constructor with default level 1*/
 Sokoban::Sokoban() {
-    Sokoban(1);
+    change_level(1);
 }
 
 /* Constructor with a specified level number*/
 Sokoban::Sokoban(unsigned int level) {
     change_level(level);
+}
+
+/* Constructor with a specified board. Useful for testing */
+Sokoban::Sokoban(std::vector<std::string> board) {
+    current_board = board;
 }
 
 /* Switch to a specific level */
@@ -37,21 +42,25 @@ void Sokoban::undo() {
     }
 }
 
-
-/* Attempt a player move in direction (up/down/left/right) 
- * and return true/false to indicate if it was successful.
- */
-
-/**** TO BE IMPLEMENTED *****/
-bool Sokoban::move(Direction direction) {
-
-    return false;
-}
-
 /* Return the current baord */
 std::vector<std::string> Sokoban::board() {
     return current_board;
 }
+
+/* Attempt a player move in direction (up/down/left/right) 
+ * and return true/false to indicate if it was successful.
+ */
+/**** TO BE IMPLEMENTED *****/
+bool Sokoban::move(Direction direction) {
+    // find the location of the character (@) on the current board
+    // get possible cell to move into, findPossibleMove
+        // return a list of coordinate to move to, if not possible coord will be a tuple of infinity
+
+    // append direction to MOVES
+    return false;
+}
+
+
 
 /* Return the number of moves made on the current board */
 unsigned int Sokoban::moves_count() {
@@ -67,30 +76,28 @@ unsigned int Sokoban::level() {
 bool Sokoban::solved() {
     
     for (auto row : current_board) {
-        /* When GOAL is found, this means that
+        /* When GOAL or PLAYER_ON_GOAL is found, this means that
          * a box is not yet placed in the goal */
-        if (row.find(GOAL) < row.size()) {
+        if (   row.find(GOAL) < row.size() 
+            || row.find(PLAYER_ON_GOAL) < row.size()) {
             return false;
         }
     }
     return true;
 }
 
-/*
- *  UTILITY FUNCTION
- */
-
-void print(std::vector<std::string> board) {
-    for (std::string row : board) {
+void Sokoban::print() {
+    for (auto& row : current_board) {
         std::cout << row << std::endl;
     }
 }
 
-int main() {
-    Sokoban soko = Sokoban();
-    print(soko.board());
+// int main() {
+//     Sokoban soko = Sokoban();
+//     soko.print();
 
-    soko = Sokoban(1);
-    print(soko.board());
-    return 0;
-}
+//     soko = Sokoban(1);
+//     soko.print();
+//     return 0;
+//     return 0;
+// }
