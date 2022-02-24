@@ -27,12 +27,16 @@ public:
 
     /* Utility Functions */
     Point position(const char item);
+    char item(Point p);
     char to_char(Direction direction);
-    bool empty_or_goal(int x, int y);
-    bool box_or_goal(int x, int y);
-    bool make_move(Direction direction, Point origin);
-    void set(Direction direction, Point point);
+    bool empty_or_goal(Point p);
+    bool box_or_goal(Point p);
     Point offset_in_dir(Direction direction, Point point, int offset);
     const char replace(const char player);
+    void set(Direction direction, Point point);
+    bool make_move(Direction direction, Point origin);
+    
+    
+    
 };
 #endif

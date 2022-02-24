@@ -35,6 +35,45 @@ const std::vector<std::vector<std::string>> levels = {
         "####"
     },
 
+    // Level 4: Use for testing empty_or_goal()
+    {
+        "#####",
+        "#@ $#",
+        "#####"
+    },
+
+    // Level 5: Use for testing empty_or_goal()
+    {
+        "#####",
+        "#@.$#",
+        "#####"
+    },
+
+    // Level 6: Use for testing box_or_goal()
+    {
+        "#####",
+        "#+$.#",
+        "#####"
+    },
+
+    // Level 7: Use for testing box_or_goal()
+    {
+        "#####",
+        "#+* #",
+        "#####"
+    },
+
+    // Level 8: Use for testing player offset_in_dir
+    {
+        "#######",
+        "#  A  #",
+        "#  U  #",
+        "#CL@RB#",
+        "#  D  #",
+        "#  E  #",
+        "#######"
+    },
+
     {
         "     ###     ",
         "     #@#     ",

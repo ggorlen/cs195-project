@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "sokoban.hpp"
+#include "utility.hpp"
 
 
 /* Constructor with default level 1*/
@@ -112,78 +113,31 @@ Point Sokoban::position(const char item) {
     return Point(LENGTH, WIDTH);
 }
 
-/* Convert direction to its equivalent character */
-char Sokoban::to_char(Direction direction) {
-    if (direction == U) {
-        return 'U';
-    }
-    else if (direction == D) {
-        return 'D';
-    }
-    else if (direction == L) {
-        return 'L';
-    }
-    else if (direction == R) {
-        return 'R';
-    }
-    else {
-        return ' ';
-    }
+char Sokoban::item(Point p) {
+    return current_board[p.x][p.y];
 }
 
 /* If a cell is a valid move, make_move() will move the player to that cell. */
 bool Sokoban::make_move(Direction direction, Point origin) {
     Point next = offset_in_dir(direction, origin, 1);
     Point os_next = offset_in_dir(direction, origin, 2);
-    if (empty_or_goal(next.x, next.y) ||
-        (box_or_goal(next.x, next.y) && 
-        empty_or_goal(os_next.x, os_next.y))) {
+    if (empty_or_goal(next) ||
+        (box_or_goal(next) && 
+        empty_or_goal(os_next))) {
 
         set(direction, origin);
         return true;
     }
     return false;
-
-}
-
-/* Return the point on the board specified by the offset and direction */
-Point Sokoban::offset_in_dir(Direction direction, Point p, int offset) {
-    if (direction == U) {
-        return Point(p.x + offset, p.y);
-    }
-    else if (direction == D) {
-        return Point(p.x - offset, p.y);
-    }
-    else if (direction == L) {
-        return Point(p.x, p.y - offset);
-    }
-    else if (direction == R) {
-        return Point(p.x, p.y + offset);
-    }
-    else {
-        /*********TO DO ********/
-        // throw an exception
-        return Point(0, 0);
-    }
-}
-
-/* Return true if the current cell is empty or goal. Otherwise, return false */
-bool Sokoban::empty_or_goal(int x, int y) {
-    return current_board[x][y] == EMPTY || current_board [x][y] == GOAL;
-}
-
-/* Return true if the current cell is a box or box_on_goal. Otherwise, return false */
-bool Sokoban::box_or_goal(int x, int y) {
-    return current_board[x][y] == BOX || current_board[x][y] == BOX_ON_GOAL;
 }
 
 /* Set the element on the board in the specified direction */
 void Sokoban::set(Direction direction, Point p) {
-    const char current_item = current_board[p.x][p.y];
+    const char current_item = item(p);
     Point next = offset_in_dir(direction, p, 1);
-    const char next_item = current_board[next.x][next.y];
+    const char next_item = item(next);
     Point os_next = offset_in_dir(direction, p, 2);
-    const char os_next_item = current_board[os_next.x][os_next.y];
+    const char os_next_item = item(os_next);
 
     if (current_item == PLAYER || current_item == PLAYER_ON_GOAL) {
         if (next_item == EMPTY) {
@@ -234,23 +188,57 @@ const char Sokoban::replace(const char player) {
     }
 }
 
-void print(std::vector<std::string> board) {
-    for (auto& row : board) {
-        std::cout << row << std::endl;
+/* Return the point on the board specified by the offset and direction */
+Point Sokoban::offset_in_dir(Direction direction, Point p, int offset) {
+    if (direction == U) {
+        return Point(p.x - offset, p.y);
+    }
+    else if (direction == D) {
+        return Point(p.x + offset, p.y);
+    }
+    else if (direction == L) {
+        return Point(p.x, p.y - offset);
+    }
+    else if (direction == R) {
+        return Point(p.x, p.y + offset);
+    }
+    else {
+        /*********TO DO ********/
+        // throw an exception
+        return Point(0, 0);
     }
 }
 
-void print(int val) {
-    std::cout << val << std::endl;
+/* Return true if the current cell is a box or box_on_goal. Otherwise, return false */
+bool Sokoban::box_or_goal(Point p) {
+    return current_board[p.x][p.y] == BOX || current_board[p.x][p.y] == BOX_ON_GOAL;
 }
 
-void print(std::string str) {
-    std::cout << str << std::endl;
+/* Return true if the current cell is empty or goal. Otherwise, return false */
+bool Sokoban::empty_or_goal(Point p) {
+    return current_board[p.x][p.y] == EMPTY || current_board [p.x][p.y] == GOAL;
 }
 
-void print(Point p) {
-    std::cout << '(' << p.x << ',' << p.y << ')' << std::endl;
+/* Convert direction to its equivalent character */
+char Sokoban::to_char(Direction direction) {
+    if (direction == U) {
+        return 'U';
+    }
+    else if (direction == D) {
+        return 'D';
+    }
+    else if (direction == L) {
+        return 'L';
+    }
+    else if (direction == R) {
+        return 'R';
+    }
+    else {
+        return ' ';
+    }
 }
+
+
 
 int main() {
     Sokoban soko = Sokoban();
@@ -265,6 +253,70 @@ int main() {
     soko = Sokoban(3);
     print(soko.board());
     print(soko.position(PLAYER_ON_GOAL));
+
+    // make tests
+    soko = Sokoban();
+    print(soko.to_char(Sokoban::Direction::U));
+
+    // Test empty_or_goal()
+    std::cout << std::endl << std::endl;
+    print("Testing empty_or_goal()");
+    soko = Sokoban(4);
+    print(soko.board());
+    print(soko.empty_or_goal(Point(1, 2)));
+
+    soko = Sokoban(5);
+    print(soko.board());
+    print(soko.empty_or_goal(Point(1, 2)));
+
+    soko = Sokoban(5);
+    print(soko.board());
+    print(soko.empty_or_goal(Point(1, 3)));
+
+    // Test box_or_goal()
+    std::cout << std::endl << std::endl;
+    print("Testing box_or_goal");
+    soko = Sokoban(6);
+    print(soko.board());
+    print(soko.box_or_goal(Point(1, 2)));
+
+    soko = Sokoban(7);
+    print(soko.board());
+    print(soko.box_or_goal(Point(1, 2)));
+
+    soko = Sokoban(7);
+    print(soko.board());
+    print(soko.box_or_goal(Point(1, 3)));
+
+    // Text offset_in_dir()
+    soko = Sokoban(8);
+    print(soko.board());
+    Point player = soko.position(PLAYER);
+    print(player);
+
+    Point offset = soko.offset_in_dir(Sokoban::Direction::U, player, 1);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::D, player, 1);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::L, player, 1);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::R, player, 1);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::U, player, 2);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::D, player, 2);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::L, player, 2);
+    print(soko.item(offset));
+
+    offset = soko.offset_in_dir(Sokoban::Direction::R, player, 2);
+    print(soko.item(offset));
 
     return 0;
 }
