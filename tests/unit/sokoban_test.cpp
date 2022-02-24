@@ -56,10 +56,47 @@ TEST_CASE("returns true if the cell at point(x, y) is goal") {
     CHECK(soko.empty_or_goal(Point(1, 2)));
 }
 
-TEST_CASE("returns true if the cell at point(x, y) is goal") {
+TEST_CASE("returns true if the cell at point(x, y) is neither empty nor goal") {
     Sokoban soko = Sokoban(5);
 
     REQUIRE_FALSE(soko.empty_or_goal(Point(1, 3)));
+}
+
+TEST_CASE("returns true if the cell at point(x, y) is box") {
+    Sokoban soko = Sokoban(6);
+
+    CHECK(soko.box_or_goal(Point(1, 2)));
+}
+
+TEST_CASE("returns true if the cell at point(x, y) is box_on_goal") {
+    Sokoban soko = Sokoban(7);
+
+    CHECK(soko.box_or_goal(Point(1, 2)));
+}
+
+TEST_CASE("returns true if the cell at point(x, y) is neither box nor box_on_goal") {
+    Sokoban soko = Sokoban(7);
+
+    REQUIRE_FALSE(soko.box_or_goal(Point(1, 3)));
+}
+
+
+TEST_CASE("returns offset in the direction given.") {
+    Sokoban soko = Sokoban(8);
+    Point player = soko.position(PLAYER);
+    Point offset = soko.offset_in_dir(Sokoban::Direction::U, player, 1);
+    CHECK(soko.item(offset) == 'U');
+
+    offset = soko.offset_in_dir(Sokoban::Direction::D, player, 1);
+    CHECK(soko.item(offset) == 'D');
+
+    offset = soko.offset_in_dir(Sokoban::Direction::L, player, 2);
+    CHECK(soko.item(offset) == 'C');
+
+    soko = Sokoban(9);
+    player = soko.position(PLAYER_ON_GOAL);
+    offset = soko.offset_in_dir(Sokoban::Direction::U, player, 1);
+    CHECK(soko.item(offset) == 'U');
 }
 
 

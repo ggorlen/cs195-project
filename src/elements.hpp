@@ -74,6 +74,17 @@ const std::vector<std::vector<std::string>> levels = {
         "#######"
     },
 
+    // Level 9: Use for testing player offset_in_dir
+    {
+        "#######",
+        "#  A  #",
+        "#  U  #",
+        "#CL+RB#",
+        "#  D  #",
+        "#  E  #",
+        "#######"
+    },
+
     {
         "     ###     ",
         "     #@#     ",

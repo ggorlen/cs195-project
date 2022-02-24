@@ -240,83 +240,83 @@ char Sokoban::to_char(Direction direction) {
 
 
 
-int main() {
-    Sokoban soko = Sokoban();
-    print(soko.board());
+// int main() {
+//     Sokoban soko = Sokoban();
+//     print(soko.board());
 
-    print(soko.position(PLAYER));
+//     print(soko.position(PLAYER));
 
-    soko = Sokoban(2);
-    print(soko.board());
-    print(soko.position(PLAYER_ON_GOAL));
+//     soko = Sokoban(2);
+//     print(soko.board());
+//     print(soko.position(PLAYER_ON_GOAL));
 
-    soko = Sokoban(3);
-    print(soko.board());
-    print(soko.position(PLAYER_ON_GOAL));
+//     soko = Sokoban(3);
+//     print(soko.board());
+//     print(soko.position(PLAYER_ON_GOAL));
 
-    // make tests
-    soko = Sokoban();
-    print(soko.to_char(Sokoban::Direction::U));
+//     // make tests
+//     soko = Sokoban();
+//     print(soko.to_char(Sokoban::Direction::U));
 
-    // Test empty_or_goal()
-    std::cout << std::endl << std::endl;
-    print("Testing empty_or_goal()");
-    soko = Sokoban(4);
-    print(soko.board());
-    print(soko.empty_or_goal(Point(1, 2)));
+//     // Test empty_or_goal()
+//     std::cout << std::endl << std::endl;
+//     print("Testing empty_or_goal()");
+//     soko = Sokoban(4);
+//     print(soko.board());
+//     print(soko.empty_or_goal(Point(1, 2)));
 
-    soko = Sokoban(5);
-    print(soko.board());
-    print(soko.empty_or_goal(Point(1, 2)));
+//     soko = Sokoban(5);
+//     print(soko.board());
+//     print(soko.empty_or_goal(Point(1, 2)));
 
-    soko = Sokoban(5);
-    print(soko.board());
-    print(soko.empty_or_goal(Point(1, 3)));
+//     soko = Sokoban(5);
+//     print(soko.board());
+//     print(soko.empty_or_goal(Point(1, 3)));
 
-    // Test box_or_goal()
-    std::cout << std::endl << std::endl;
-    print("Testing box_or_goal");
-    soko = Sokoban(6);
-    print(soko.board());
-    print(soko.box_or_goal(Point(1, 2)));
+//     // Test box_or_goal()
+//     std::cout << std::endl << std::endl;
+//     print("Testing box_or_goal");
+//     soko = Sokoban(6);
+//     print(soko.board());
+//     print(soko.box_or_goal(Point(1, 2)));
 
-    soko = Sokoban(7);
-    print(soko.board());
-    print(soko.box_or_goal(Point(1, 2)));
+//     soko = Sokoban(7);
+//     print(soko.board());
+//     print(soko.box_or_goal(Point(1, 2)));
 
-    soko = Sokoban(7);
-    print(soko.board());
-    print(soko.box_or_goal(Point(1, 3)));
+//     soko = Sokoban(7);
+//     print(soko.board());
+//     print(soko.box_or_goal(Point(1, 3)));
 
-    // Text offset_in_dir()
-    soko = Sokoban(8);
-    print(soko.board());
-    Point player = soko.position(PLAYER);
-    print(player);
+//     // Text offset_in_dir()
+//     soko = Sokoban(8);
+//     print(soko.board());
+//     Point player = soko.position(PLAYER);
+//     print(player);
 
-    Point offset = soko.offset_in_dir(Sokoban::Direction::U, player, 1);
-    print(soko.item(offset));
+//     Point offset = soko.offset_in_dir(Sokoban::Direction::U, player, 1);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::D, player, 1);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::D, player, 1);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::L, player, 1);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::L, player, 1);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::R, player, 1);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::R, player, 1);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::U, player, 2);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::U, player, 2);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::D, player, 2);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::D, player, 2);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::L, player, 2);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::L, player, 2);
+//     print(soko.item(offset));
 
-    offset = soko.offset_in_dir(Sokoban::Direction::R, player, 2);
-    print(soko.item(offset));
+//     offset = soko.offset_in_dir(Sokoban::Direction::R, player, 2);
+//     print(soko.item(offset));
 
-    return 0;
-}
+//     return 0;
+// }
