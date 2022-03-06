@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+  * {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+  }
+  .row {
+    display: flex;
+  }
+  body {
+    width: 400px;
+    padding: 1em;
+  }
+  .cell {
+    height: 20px;
+    width: 20px;
+  }
+  .title {
+    font-family: Indie Flower;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    height: 400px;
+    width: 400px;
+    font-size: 6em;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    margin-bottom: 1em;
+  }
+  .card {
+    position: relative;
+    padding: 2em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        moves: 0
+      </div>
+      <div style="color: #555">
+        <i class='fa fa-arrow-left'></i>
+        <i class='fa fa-undo'></i>
+        <i class='fa fa-map-signs'></i>
+        <i class='fa fa-gear'></i>
+        <i class='fa fa-question'></i>
+      </div>
+    </div>
+    <div class="board">
+    </div>
+    <div class="overlay">
+      <div class="title">Sokoban</div>
+      <div  class="title" style="font-size: .3em">Tap to start</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div>
+        moves: 0
+      </div>
+      <div style="color: #555">
+        <i class='fa fa-arrow-left'></i>
+        <i class='fa fa-undo'></i>
+        <i class='fa fa-map-signs'></i>
+        <i class='fa fa-gear'></i>
+        <i class='fa fa-question'></i>
+      </div>
+    </div>
+    <div class="board">
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div>
+        moves: 0
+      </div>
+      <div style="color: #555">
+        <i class='fa fa-arrow-left'></i>
+        <i class='fa fa-undo'></i>
+        <i class='fa fa-map-signs'></i>
+        <i class='fa fa-gear'></i>
+        <i class='fa fa-question'></i>
+      </div>
+    </div>
+    <div class="board">
+    </div>
+    <div class="overlay">
+      <div class="title">Levels</div>
+      <div class="title" style="font-size: .3em">1 <i class="fa fa-check"></i> [best: 42]</div>
+      <div class="title" style="font-size: .3em">2 <i class="fa fa-close"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div class="title" style="font-size: .3em">3 <i class="fa fa-close"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div class="title" style="font-size: .3em">4 <i class="fa fa-close"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div class="title" style="font-size: .3em; transform: rotate(90deg); position: absolute; top: 250px;left: 250px;">&lt;-#----------&gt;</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div>
+        moves: 0
+      </div>
+      <div style="color: #555">
+        <i class='fa fa-arrow-left'></i>
+        <i class='fa fa-undo'></i>
+        <i class='fa fa-map-signs'></i>
+        <i class='fa fa-gear'></i>
+        <i class='fa fa-question'></i>
+      </div>
+    </div>
+    <div class="board">
+    </div>
+    <div class="overlay">
+      <div class="title">Settings</div>
+      <div  class="title" style="font-size: .3em">blah blah</div>
+      <div  class="title" style="font-size: .3em">blah blah</div>
+      <div  class="title" style="font-size: .3em">blah blah</div>
+      <div  class="title" style="font-size: .3em">blah blah</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div>
+        moves: 0
+      </div>
+      <div style="color: #555">
+        <i class='fa fa-arrow-left'></i>
+        <i class='fa fa-undo'></i>
+        <i class='fa fa-map-signs'></i>
+        <i class='fa fa-gear'></i>
+        <i class='fa fa-question'></i>
+      </div>
+    </div>
+    <div class="board">
+    </div>
+    <div class="overlay">
+      <div class="title">Help</div>
+      <div  class="title" style="font-size: .3em">How to play Sokoban... etc</div>
+    </div>
+  </div>
+</body>
+<script>
+const level = [
+  "####################",
+  "#..#    #          #",
+  "#.$  $  #$$  $## $##",
+  "#.$#  ###  ## ##   #",
+  "#  # $ #  $$   $   #",
+  "# ###  # #  #$  ####",
+  "#  ## # $   #@ #   #",
+  "# $    $  ##.##  $ #",
+  "#  # $# $# $     ###",
+  "#  #  #  #   ###   #",
+  "#  ######## #      #",
+  "#           #  #.#.#",
+  "##$########$#   ...#",
+  "#    .*  #    ##.#.#",
+  "# .*...*   $  .....#",
+  "####################"
+];
+
+for (const card of [...document.querySelectorAll(".card")]) {
+  for (const row of level) {
+    const r = document.createElement("div");
+    card.querySelector(".board").append(r);
+    r.classList.add("row");
+  
+    for (const cell of [...row]) {
+      const c = document.createElement("div");
+      r.append(c);
+      c.classList.add("cell");
+      const imgs = {
+        " ": "floor.png",
+        "#": "wall.png",
+        "$": "box.png",
+        "@": "player.png",
+        "+": "on-goal.png",
+        "*": "box-on-goal.png",
+        ".": "goal.png",
+      };
+      c.innerHTML = `<img src="${imgs[cell]}">`;
+    }
+  }
+}
+
+</script>
+</html>
