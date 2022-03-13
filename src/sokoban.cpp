@@ -3,8 +3,7 @@
 Sokoban::Sokoban(std::vector<std::vector<std::string>> levels) 
 {
     this->levels = levels;
-    current_level = 0;
-    _board = levels.at(current_level);
+	change_level(1);
 }
 
 unsigned int Sokoban::level() 
@@ -46,4 +45,11 @@ void Sokobann::locate_player()
 	
 	throw std::invalid_argument("Player not found...");
 	
+}
+
+void Sokoban::change_level(unsigned int level_number)
+{
+	current_level = level_number;
+	_board = levels.at(current_level - 1);
+	locate_player();
 }

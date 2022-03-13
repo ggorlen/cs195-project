@@ -51,3 +51,27 @@ TEST_CASE("should not be solved when empty goal cell is present") {
     Sokoban soko(levels);
     CHECK(!soko.solved());
 }
+
+TEST_CASE("should allow player to choose level")
+{
+	std::vector<std::vector<std::string>> levels = 
+	{
+		{
+			"#####",
+			"#@$.#",
+			"#####",
+		},
+		
+		{
+			"###.#",
+			"#@  .",
+			"###.#",
+		},
+		
+		{
+			"#####",
+			"#@$.#",
+			"#####",
+		}
+	};
+}

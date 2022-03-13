@@ -18,6 +18,7 @@ public:
     unsigned int level();
     bool solved();
     std::vector<std::string> board();
+	void change_level(unsigned int);
 };
 
 #endif
