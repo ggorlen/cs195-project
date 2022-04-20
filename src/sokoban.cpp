@@ -80,7 +80,7 @@ void Sokoban::update(Direction direction) {
 }
 
 bool Sokoban::make_move(Direction direction) {
-    auto [dy, dx] = dir_offsets[direction];
+    auto [dy, dx] = dir_offsets.at(direction);
 
     // Player moves to a goal or empty cell
     if (_board[py+dy][px+dx] == Cell::GOAL || 
