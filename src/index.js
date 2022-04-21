@@ -30,11 +30,13 @@ const initializeGame = () => {
       "string", // return type
     ),
     undo: Module.cwrap("sokoban_undo", "bool"),
+    rewind: Module.cwrap("sokoban_rewind", "bool"),
     solved: Module.cwrap("sokoban_solved", "bool"),
   };
 
   const boardEl = document.getElementById("board");
   const undoEl = document.getElementById("undo");
+  const rewindEl = document.getElementById("rewind");
   const redoEl = document.getElementById("redo");
   const cellToClass = {
     "_": "floor-outside",
@@ -86,6 +88,12 @@ const initializeGame = () => {
   });
   undoEl.addEventListener("click", event => {
     if (soko.undo()) {
+      renderBoard();
+    }
+  });
+ rewindEl.addEventListener("click", event => {
+    if (soko.rewind()) {
+      console.log("rewind clicked");
       renderBoard();
     }
   });

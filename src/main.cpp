@@ -68,6 +68,10 @@ bool sokoban_solved() {
     return soko.solved();
 }
 
+bool sokoban_rewind() {
+    return soko.rewind();
+}
+
 bool sokoban_undo() {
     return soko.undo();
 }

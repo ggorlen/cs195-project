@@ -533,6 +533,101 @@ TEST_SUITE("Test cases for undo()") {
     }
 }
 
+TEST_SUITE("Test cases for rewind()") {
+
+    TEST_CASE("should revert to original") {
+        Sokoban soko({{
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        }});
+        std::vector<std::string> expected = {
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        };
+        CHECK(soko.move(4, 1));
+        CHECK(soko.rewind());
+        CHECK(soko.board() == expected);
+    }
+
+    TEST_CASE("should revert to original after two rewind()") {
+        Sokoban soko({{
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        }});
+        std::vector<std::string> expected = {
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        };
+        CHECK(soko.move(4, 1));
+        CHECK(soko.move(2, 3));
+        CHECK(soko.rewind());
+        CHECK(soko.rewind());
+        CHECK(soko.board() == expected);
+    }
+
+    TEST_CASE("should undo once") {
+        Sokoban soko({{
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        }});
+        std::vector<std::string> expected = {
+            "#####",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#@  #",
+            "#####",
+        };
+        CHECK(soko.move(4, 1));
+        CHECK(soko.move(Direction::R));
+        CHECK(soko.rewind());
+        CHECK(soko.board() == expected);
+    }
+
+    TEST_CASE("should revert to original") {
+        Sokoban soko({{
+            "#####",
+            "# @ #",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#####",
+        }});
+        std::vector<std::string> expected = {
+            "#####",
+            "#   #",
+            "#   #",
+            "#   #",
+            "#@  #",
+            "#####",
+        };
+        CHECK(soko.move(4, 1));
+        CHECK(soko.move(Direction::R));
+        CHECK(soko.rewind());
+        CHECK(soko.board() == expected);
+    }
+}
+
 
 TEST_SUITE("Test cases for redo()") {
 

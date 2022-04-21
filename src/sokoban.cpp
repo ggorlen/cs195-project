@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <unordered_map>
 
+#include "print.cpp" // DELETE
+
 Sokoban::Sokoban(std::vector<std::vector<std::string>> levels) {
     this->levels = levels;
     change_level(0);
@@ -74,12 +76,12 @@ void Sokoban::push_box(int dy, int dx) {
 }
 
 /* Update move with associated board state */
-void Sokoban::update(Direction direction) {
+void Sokoban::update(Direction direction, bool fast_forward) {
     moves.push_back(direction);
-    history.push_back(_board);
+    history.push_back(std::make_pair(_board, fast_forward));
 }
 
-bool Sokoban::make_move(Direction direction) {
+bool Sokoban::make_move(Direction direction, bool fast_forward = false) {
     auto [dy, dx] = dir_offsets.at(direction);
 
     // Player moves to a goal or empty cell
@@ -87,7 +89,7 @@ bool Sokoban::make_move(Direction direction) {
         _board[py+dy][px+dx] == Cell::EMPTY) {
 
         move_player(dy, dx);
-        update(direction);
+        update(direction, fast_forward);
 
         return true;
     }
@@ -103,12 +105,17 @@ bool Sokoban::make_move(Direction direction) {
 
             push_box(dy, dx);
             move_player(dy, dx);
-            update(direction);
+            update(direction, fast_forward);
 
             return true;
         }
     }
     return false;
+}
+
+bool Sokoban::move(Direction direction, bool fast_forward) {
+    undone.clear();
+    return make_move(direction, fast_forward);
 }
 
 bool Sokoban::move(Direction direction) {
@@ -145,11 +152,14 @@ bool Sokoban::move(unsigned int y, unsigned int x) {
 
     // Visit all paths to a destination if possible
     while (!queue.empty()) {
-        // Get the first node from the queue
+        // Get the first path from the queue
         auto current = queue.front();
         queue.pop();
 
         if (current == destination) {
+            // Mark the origin with fast-forward
+            history.back().second = true;
+
             // Build the valid path from the origin to the destination
             std::stack<std::pair<unsigned int, unsigned int>> paths;
 
@@ -157,16 +167,18 @@ bool Sokoban::move(unsigned int y, unsigned int x) {
                 paths.push(current);
                 current = visited[current];
             }
-            
+
             // Execute move for every path in paths
             while (!paths.empty()) {
                 std::pair<int, int> next = paths.top();
                 std::pair<int, int> offset(next.first - current.first, next.second - current.second);
                 bool moved = false;
 
+                
+
                 for (const auto &[direction, value] : dir_offsets) {
                     if (offset == dir_offsets.at(direction)) {
-                        moved = move(direction);
+                        moved = (paths.size() == 1) ? move(direction, true) : move(direction, false);
                     }
                 }
 
@@ -201,10 +213,9 @@ bool Sokoban::move(unsigned int y, unsigned int x) {
             visited[neighbor] = current;
             queue.push(neighbor);
         }
-
     }
     
-    // No valid path to the destionation has been found
+    // No valid path to the destination
     return false;
 }
 
@@ -218,8 +229,43 @@ bool Sokoban::undo() {
     moves.pop_back();
     history.pop_back();
 
-    _board = history.back();
+    _board = history.back().first;
     locate_player();
+
+    return true;
+}
+
+bool Sokoban::rewind() {
+    
+    if (moves.empty()) {
+        return false;
+    }
+    
+    undo();
+
+    // Reset fast_forward if the previous state is landmarked as fast_forward
+    // bool fast_forward = history.back().second;
+    // if (fast_forward) {
+    //     history.back().second = false;
+    //     return false;
+    // }
+
+    while (!history.empty()) {
+        bool fast_forward = history.back().second;
+
+        // std::cout << "size: " << history.size();
+        // std::cout << "ff: " << fast_forward << std::endl;
+        // std::cout << "board: ";
+        //print_board();
+
+        if (!fast_forward) {
+            undo();
+        }
+        else {
+            history.back().second = false;
+            break;
+        }
+    }
 
     return true;
 }
@@ -231,7 +277,7 @@ bool Sokoban::redo() {
 
     Direction direction = undone.back().first;
     _board = undone.back().second;
-    update(direction);
+    update(direction, false);  //TODO
 
     undone.pop_back();
 
@@ -249,6 +295,6 @@ void Sokoban::change_level(unsigned int level_number) {
     _board = levels.at(current_level);
     moves.clear();
     undone.clear();
-    history.push_back(_board);
+    history.push_back(std::make_pair(_board, false));
     locate_player();
 }

@@ -53,14 +53,15 @@ private:
     unsigned int py;
     unsigned int px;
     std::vector<Direction> moves;
-    std::vector<std::vector<std::string>> history;
+    std::vector<std::pair<std::vector<std::string>, bool>> history;
     std::vector<std::pair<Direction, std::vector<std::string>>> undone;
 
     void locate_player();
     void move_player(int dy, int dx);
     void push_box(int dy, int dx);
-    void update(Direction direction);
-    bool make_move(Direction direction);
+    void update(Direction direction, bool fast_forward);
+    bool make_move(Direction direction, bool fast_forward);
+    bool move(Direction direction, bool fast_forward);
 
 public:
     Sokoban(std::vector<std::vector<std::string>> levels);
@@ -70,6 +71,7 @@ public:
     std::vector<std::string> board();
     bool move(Direction direction);
     bool move(unsigned int y, unsigned int x);
+    bool rewind();
     bool undo();  
     bool redo();
     void reset();
