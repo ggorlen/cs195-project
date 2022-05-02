@@ -236,16 +236,27 @@ const renderLevel = (root, levelNumber) => {
   renderStatus = () => {
     const statusHTML = `
     <div>Level ${soko.levelNumber()+1}</div>
-    <div> STATS
-      <button title="status"><span class="material-symbols-outlined">expand_circle_down</span></button>
-    </div>
-    <div id="status-collapse">
-      <div>current: ${soko.movesSize()}</div>
-      <div>best: ${localStorage.getItem(soko.levelNumber()+1)} </div>
+    <button title="Stats" class="collapse"><span class="material-symbols-outlined">expand_circle_down</span></button>
+    <div class="stats">
+      <div>current:  ${soko.movesSize()}</div>
+      <div>best:  ${(localStorage.getItem(soko.levelNumber()+1) == null)  ? 
+        "&infin;" : (localStorage.getItem(soko.levelNumber()+1))} </div>
       <div id="status-box">${soko.sequence()} </div>
     </div
     `;
     document.querySelector("#status").innerHTML = statusHTML;
+
+    let collapseEl = document.querySelector(".collapse");
+    let statsEl = document.querySelector(".stats");
+    collapseEl.addEventListener("click", function() {
+      statsEl.classList.toggle("active");
+      if (statsEl.style.maxHeight) {
+        statsEl.style.maxHeight = null;
+      } 
+      else {
+        statsEl.style.maxHeight = statsEl.scrollHeight + "px";
+      } 
+    });
   };
 
   undoEl.addEventListener("click", event => {
