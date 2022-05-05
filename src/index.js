@@ -124,6 +124,11 @@ const renderLevel = (root, levelNumber) => {
 
   soko.changeLevel(levelNumber);
 
+  function rotatePlayer(event) {
+    const playerEl = document.querySelector(".player, .player-on-goal");
+    playerEl.style.transform = `rotate(${dirToDegree[event]}deg)`;
+  }
+
   const boardEl = document.getElementById("board");
   const undoEl = document.getElementById("undo");
   const redoEl = document.getElementById("redo");
@@ -174,10 +179,9 @@ const renderLevel = (root, levelNumber) => {
     if (soko.goto(row, col)) {
       renderBoard();
     }
-    const playerSequence = soko.sequence()[soko.sequence().length - 1];
-    const playerEl = document.querySelector(".player, .player-on-goal");
-    const key = Object.keys(moves).find(key => moves[key] === playerSequence);
-    playerEl.style.transform = `rotate(${dirToDegree[key]}deg)`;
+    const lastMove = soko.sequence()[soko.sequence().length - 1];
+    const key = Object.keys(moves).find(key => moves[key] === lastMove);
+    rotatePlayer(key);
   });
   undoEl.addEventListener("click", event => {
     if (soko.undo()) {
@@ -221,8 +225,7 @@ const renderLevel = (root, levelNumber) => {
           console.log("solved!");
         }
       }
-      const playerEl = document.querySelector(".player, .player-on-goal");
-      playerEl.style.transform = `rotate(${dirToDegree[event.code]}deg)`;
+      rotatePlayer(event.code);
     }
     else if (event.code === "KeyZ" && soko.undo()) {
       renderBoard();
